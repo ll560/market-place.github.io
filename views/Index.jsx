@@ -6,6 +6,7 @@ class Index extends React.Component{
         const {memes} = this.props;
         return(
             <div>
+                
                 {/*map() returns an array (in this case an array of html elements), and excepts a function that iterates over everything in the array*/}
                 <h1> Memes Index Page: ALL MEMES</h1>
                 <ul>

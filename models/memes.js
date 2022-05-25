@@ -1,21 +1,21 @@
 const memes = [
     {
-        name:'apple',
+        name:'funny',
         color: 'red',
         readyToEat: true
     },
     {
-        name:'pear',
+        name:'scary',
         color: 'green',
         readyToEat: false
     },
     {
-        name:'banana',
+        name:'sad',
         color: 'yellow',
         readyToEat: true
     },
     {
-        name:'banana',
+        name:'surprising',
         color: 'yellow',
         readyToEat: true
     }
