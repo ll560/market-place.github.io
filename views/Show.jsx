@@ -3,7 +3,7 @@ const memes = require('../models/memes');
 
 class Show extends React.Component{
     render(){
-        console.log(this.props)
+        // console.log(this.props)
         const meme = this.props.meme
 
         return(
