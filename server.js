@@ -1,42 +1,132 @@
-const express = require('express');
-const app = express();
+require('dotenv').config()
+const express = require('express')
+const {connect, connection} = require('mongoose')
+const method = require('method-override')
+const app = express()
 const PORT = 3000
-const memes = require('./models/memes')
+const Meme = require('./models/Meme')
 
-//setup engine
+// ===== Connection to Database =====
+connect(process.env.MONGO_URI, {
+    useNewUrlParser: true,
+    useUnifiedTopology: true
+})
+connection.once('open', () => console.log('Connected to Mongo'))
+
+// Setup Engineze
 app.set('view engine', 'jsx')
 app.engine('jsx', require('express-react-views').createEngine())
 
-//=======Middleware================
-app.use(express.urlencoded({extended: false}));
-app.use((req, res, next) =>{
-    console.log('Middleware for each route')
-    next()
+// ===== Middleware =====
+app.use(method('_method'))
+app.use(express.urlencoded({extended:false}));
+app.use(express.static('public'))
+// Use Express middleware to parse JSON.
+app.use(express.json())
+// app.use((req, res, next) => {
+//     console.log('I run for all the routes.')
+//     next()
+// })
+
+// ===== Routes =====
+
+// I.N.D.U.C.E.S
+// Index, New, Delete, Update, Create, Edit, Show
+
+// Index
+app.get('/memes', (req, res) => {
+    // Query model to return all fruits
+    Meme.find({}, (err, allMemes) => {
+        res.render('Index', {memes: allMemes})
+    })
 })
 
+// New
+app.get('/memes/new', (req, res) => {
+    res.render('New');
+});
 
-
-//=============Routes===============
-app.get('/', (req, res) => {
-    res.render('Index', {memes: memes})
+app.delete('/memes/:id', (req, res) => {
+    // Delete funciton has 2 arguments
+    /*
+        1. the id 
+        2. callback
+    */
+    Meme.findByIdAndDelete(req.params.id, (err) => {
+        if (!err){
+            res.status(200).redirect('/memes')
+        } else {
+            res.status(400).json(err)
+        }
+    })
 })
 
-app.get('/fruits/new', (req, res) =>{
-    res.render('New')
+// Update
+app.put('/memes/:id', (req, res) => {
+    req.body.readyToEat = req.body.readyToEat === 'on' ? true : false;
+    // Update funciton has 4 arguments
+    /*
+        1. the id 
+        2. the content of what we want to update 
+        3. options object {new:true}- gives the callback function the newly updated document
+        4. callback
+    */
+    Meme.findByIdAndUpdate(req.params.id, req.body, {new: true}, (err, updatedMeme) => {
+        if (!err) {
+            res.status(200).redirect('/memes')
+        } else {
+            res.status(400).json(err)
+        }
+    })
 })
 
-//show
-app.get('/fruits/:indexOfFruitsArray', (req, res) => {
-    console.log(memes)
-    res.render('Show', {meme: memes[req.params.indexOfFruitsArray]})
+// Create
+app.post('/memes', (req, res) => {
+    // req.body.readyToEat === 'on'
+    // ?
+    // req.body.readyToEat = true
+    // :
+    // req.body.readyToEat = false
+    // console.log('BEFORE', req.body.name)
+    req.body.readyToEat = req.body.readyToEat === 'on' ? true : false;
+
+    // Below line mimics working with a database
+    // fruits.push(req.body)
+    // console.log('req.body:', req.body)
+
+    // Create 1st arg: the actual object we want to insert inside our database
+    // Callback 1st arg: error
+    // Callback 2nd arg: the newly created object
+
+    Meme.create(req.body, (err, createdMeme) => {
+        // console.log(createdFruit)
+        // res.send(createdFruit)
+        res.redirect('/memes')
+    })
 })
 
-//create route -- actived by clicking button
-app.post('/', (req, res) =>{
-    memes.push(req.body)
-    console.log('this is the new data--------->', req.body)
-    res.redirect('/')
+// Edit 
+app.get('/memes/:id/edit', (req, res) => {
+    // Querying our database to find the document we want to edit and send that data to the Edit.jsx page
+    Meme.findById(req.params.id, (err, foundMeme) => {
+        if (!err) {
+            res.render('Edit', {meme: foundMeme})
+        } else {
+            res.status(400).json(err)
+        }
+    })
 })
 
+// Show
+app.get('/memes/:id', (req, res) => {
+    Meme.findById(req.params.id, (err, foundMeme) => {
+        res.render('Show', {meme: foundMeme})
+    } ) 
+    // This will display our Show component in the browser. Node will automatically look for a Show file inside the views folder.
+})
 
-app.listen(PORT, () => console.log(`Listening on port ${PORT}`))
+// Returns giant object with info and methods we can use
+// Focus on Query object
+// console.dir(Fruit)
+
+app.listen(PORT, () => console.log(`Listening to port ${PORT}`))

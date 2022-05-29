@@ -1,24 +1,29 @@
 const React = require('react')
+const DefaultLayout = require('./layout/DefaultLayout')
 
-module.exports = class New extends React.Component{
-    render(){
-        return(
-            <>{/*react fragment*/}
-                <h1>Create Meme Page</h1>
-                <form action='/' method='POST'>
-                <label htmlFor='name'>Name:</label>
-                <input type="text" id='name' name='name'></input>
 
-                <label htmlFor='color'>Color</label>
-                <input type='text' id='color' color='color'></input>
+module.exports = class New extends React.Component {
+    render() {
+        return (
+            <DefaultLayout title="New">
+                <h1>Create/Add a Meme Page</h1>
 
-                <input type='submit' value='Create New Meme'></input>
+                <form action="/memes" method="POST">
+                <div className="card-content">
+                    <label htmlFor="name">Name:</label>
+                    <input type="text" id="name" name="name"/>
+                    <label htmlFor="price">Price:</label>
+                    <input type="text" id="price" name="price"/>
+                    <label htmlFor="quantity">Qty:</label>
+                    <input type="text" id="quantity" name="quantity"/>
+                    <label htmlFor="readyToEat">Ready to eat:</label>
+                    <input type="checkbox" id="readyToEat" name="readyToEat"/>
+                    <input type="submit" value="Create Fruit"/>
+                    </div>
                 </form>
-
-            </>
+            </DefaultLayout>
         )
     }
-
-}
-
+} 
+ 
 //export listed in the class component 
