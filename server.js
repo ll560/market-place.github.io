@@ -2,6 +2,8 @@ require('dotenv').config()
 const express = require('express')
 const {connect, connection} = require('mongoose')
 const method = require('method-override')
+//const cloudinary = require('cloudinary').v2;
+//console.log(cloudinary.config().cloud_name);
 const app = express()
 const PORT = 3000
 const Meme = require('./models/Meme')
@@ -37,6 +39,8 @@ app.use(express.json())
 app.get('/memes', (req, res) => {
     // Query model to return all fruits
     Meme.find({}, (err, allMemes) => {
+
+
         res.render('Index', {memes: allMemes})
     })
 })
@@ -79,6 +83,18 @@ app.put('/memes/:id', (req, res) => {
         }
     })
 })
+app.put('/memes/:id/stock', async (req, res) => {
+    
+    const meme = await Meme.findById(req.params.id)
+    
+    Meme.findByIdAndUpdate(req.params.id, {quantity: (meme.quantity-1)}, {new: true}, (err, updatedQuantity) =>{if (!err) {
+        res.status(200).redirect('/memes')
+    } else {
+        res.status(400).json(err)
+    }
+    })
+})
+
 
 // Create
 app.post('/memes', (req, res) => {
@@ -105,8 +121,17 @@ app.post('/memes', (req, res) => {
     })
 })
 
+app.post('/memes/:id/stock', (req, res) => {
+    console.log("This is working")
+    
+})
+
 // Edit 
 app.get('/memes/:id/edit', (req, res) => {
+
+    // if (req.body.quantity === 0){
+    //  
+    //}  
     // Querying our database to find the document we want to edit and send that data to the Edit.jsx page
     Meme.findById(req.params.id, (err, foundMeme) => {
         if (!err) {
@@ -116,6 +141,7 @@ app.get('/memes/:id/edit', (req, res) => {
         }
     })
 })
+
 
 // Show
 app.get('/memes/:id', (req, res) => {
@@ -128,5 +154,17 @@ app.get('/memes/:id', (req, res) => {
 // Returns giant object with info and methods we can use
 // Focus on Query object
 // console.dir(Fruit)
+
+
+// cloudinary.uploader
+// .upload("./public/images/red-blood-cell.png", {
+//     resource_type:"image",
+// })
+// .then((result)=>{
+//     console.log("sucess", JSON.stringify(result, null, 2));
+// })
+// .catch((error) => {
+//     console.log('error', JSON.stringify(error, null, 2));
+// });
 
 app.listen(PORT, () => console.log(`Listening to port ${PORT}`))

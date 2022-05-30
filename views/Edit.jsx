@@ -9,6 +9,8 @@ module.exports = class Edit extends React.Component {
             <DefaultLayout title="Edit">
                 <h1>{meme.name.toUpperCase()} Edit Page</h1>
                 <form action={`/memes/${meme._id}?_method=PUT`} method="POST">
+                    <label htmlFor="image">Image URL:</label>
+                    <input type="text" id="image" name="image" defaultValue={meme.image}></input>
                     <label htmlFor="name">Name:</label>
                     <input type="text" id="name" name="name" defaultValue={meme.name} />
                     <label htmlFor="price">Price:</label>
