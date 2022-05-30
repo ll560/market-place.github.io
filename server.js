@@ -39,11 +39,14 @@ app.use(express.json())
 app.get('/memes', (req, res) => {
     // Query model to return all fruits
     Meme.find({}, (err, allMemes) => {
-
-
         res.render('Index', {memes: allMemes})
     })
 })
+//online
+app.get('/memes/online', (req, res) => {
+        res.render('Online')
+    })
+
 
 // New
 app.get('/memes/new', (req, res) => {
@@ -67,7 +70,7 @@ app.delete('/memes/:id', (req, res) => {
 
 // Update
 app.put('/memes/:id', (req, res) => {
-    req.body.readyToEat = req.body.readyToEat === 'on' ? true : false;
+    
     // Update funciton has 4 arguments
     /*
         1. the id 
@@ -104,7 +107,7 @@ app.post('/memes', (req, res) => {
     // :
     // req.body.readyToEat = false
     // console.log('BEFORE', req.body.name)
-    req.body.readyToEat = req.body.readyToEat === 'on' ? true : false;
+   
 
     // Below line mimics working with a database
     // fruits.push(req.body)

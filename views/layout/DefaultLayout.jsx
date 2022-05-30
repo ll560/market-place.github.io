@@ -13,7 +13,7 @@ class DefaultLayout extends React.Component {
           <title>{this.props.title}</title>
         </head>
         <body>
-          <script src="script.js"></script>
+          {/* <script defer src="script.js"></script> */}
           <h1>{this.props.title}</h1>
           {this.props.children}
           

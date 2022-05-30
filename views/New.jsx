@@ -18,9 +18,9 @@ module.exports = class New extends React.Component {
                     <input type="text" id="price" name="price"/>
                     <label htmlFor="quantity">Qty:</label>
                     <input type="text" id="quantity" name="quantity"/>
-                    <label htmlFor="readyToEat">Ready to eat:</label>
-                    <input type="checkbox" id="readyToEat" name="readyToEat"/>
-                    <input type="submit" value="Create Meme"/>
+                    {/* <label htmlFor="readyToEat">Ready to eat:</label>
+                    <input type="checkbox" id="readyToEat" name="readyToEat"/> */}
+                    <input className="edit" type="submit" value="Create Meme"/>
                     </div>
                 </form>
             </DefaultLayout>

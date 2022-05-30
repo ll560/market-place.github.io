@@ -1,6 +1,6 @@
 const React = require('react')
 const DefaultLayout = require('./layout/DefaultLayout')
-const script = require('../public/script.js')
+
 class Show extends React.Component {
 
   
@@ -12,8 +12,11 @@ class Show extends React.Component {
             <DefaultLayout title="Show">
                 <div>
                     
-        <p className="content"><img className="image" src={meme.image} alt={meme.name}></img>The {meme.name}'s price is ${meme.price} and there are {meme.quantity} in stock.</p>
-        <p>   </p>
+        <div className="show-content">
+            <img className="image2" src={meme.image} alt={meme.name}></img>
+            <p className="text2">The {meme.name}'s price is ${meme.price} and there are {meme.quantity} in stock.</p>
+        </div>
+        {/* <p> --- </p>
                     <p>
                         {
                             meme.readyToEat
@@ -22,23 +25,24 @@ class Show extends React.Component {
                                 :
                                 "It's not ready to eat...Can't touch this"
                         }
-                    </p>
+                    </p> */}
 
-                    <div id='stock'>
+                    <div className='stock2'>
                                         {meme.quantity > 0
                                             ? <form action={`/memes/${meme._id}/stock?_method=PUT`} method="POST">
-                                            <button className="add-to-cart" type="submit">Add to Cart</button>
+                                            {/* <button className="add-to-cart" type="submit">Add to Cart</button> */}
                                             </form>
-                                            : <div className='outOfStock'>Out Of Stock!</div> 
+                                            : <div className='outOfStock2'>Out Of Stock!</div> 
                                         }
                                     </div>
 
                     <button><a href={'/memes'}>Back</a></button>
                     <hr />
+                    
+                    <button id="style"><a href={`/memes/${meme._id}/edit`}>{`Edit ${meme.name}`}</a></button>
                     <form action={`/memes/${meme._id}?_method=DELETE`} method="POST">
-                        <input type="submit" value="DELETE" />
+                        <input id="style" type="submit" value="DELETE" />
                     </form>
-                    <button><a href={`/memes/${meme._id}/edit`}>{`Edit ${meme.name}`}</a></button>
                     
                     </div>
             </DefaultLayout>

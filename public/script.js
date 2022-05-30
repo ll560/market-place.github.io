@@ -1,5 +1,5 @@
-console.log("hello")
-let sidebar = document.querySelector(".sidebar");
+console.log("script tag")
+let sidebar = document.querySelector(".card-container");
 
 let top = localStorage.getItem("sidebar-scroll");
 if (top !== null) {
