@@ -47,7 +47,9 @@ app.get('/memes/online', (req, res) => {
         res.render('Online')
     })
 
-
+    app.get('/memes/about', (req, res) => {
+        res.render('About')
+    })
 // New
 app.get('/memes/new', (req, res) => {
     res.render('New');

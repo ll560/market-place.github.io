@@ -164,16 +164,55 @@ img{
     margin-top: 20px;
 }
 
-#style{
+#style-edit{
     font-size: 0.8rem;
-    padding: 0.2rem;
+    padding: 0.3rem;
     margin-top: 10px;
     border-radius: 0.5rem;
     border: 0.1rem 404040 solid;
-    background-color:rgb(207, 7, 247);
+    background-color:rgb(7, 247, 135);
+    
 
     width: 40%;
     margin-left: 250px;
     margin-right: auto;
     cursor: pointer;
+}
+
+#style-edit-1{
+    text-decoration: none;
+}
+#style-delete{
+    font-size: 0.8rem;
+    padding: 0.3rem;
+    margin-top: 10px;
+    border-radius: 0.5rem;
+    border: 0.1rem 404040 solid;
+    background-color:rgb(247, 7, 7);
+    
+    width: 40%;
+    margin-left: 250px;
+    margin-right: auto;
+    cursor: pointer;
+
+}
+
+.about-content{
+    background-color: #e0e0e0;
+    /* border: 3px solid red; */
+    border-radius: 15px;
+    padding: 5px 20px;
+    
+
+    display: flex;
+    flex-direction: row;
+    margin-top: 60px;
+    margin-left: auto;
+    margin-right: auto;
+    width: 50%;
+
+    font-size: 1.5rem;
+
+
+
 }

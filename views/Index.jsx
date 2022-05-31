@@ -30,7 +30,7 @@ class Index extends React.Component {
                             <a className='link' href="/memes/new">Add a New Meme</a> 
                             </div>
                             <div className="new"> 
-                            <a className='link'>About</a>
+                            <a className='link' href="/memes/about">About</a>
                             </div>
                             <div className="new"> 
                             <a className='link' href="/memes/online">Memes Online</a>
@@ -53,7 +53,7 @@ class Index extends React.Component {
                                         <p><a href={`/memes/${meme._id}`}>{meme.name}</a></p>
                                         <p>Price: ${meme.price}</p>
                                         <p>Quantity: {meme.quantity}</p>
-                                        {/* <p>{meme.readyToEat ? 'READY' : 'NOT READY'}</p> */}
+                                       
                                         <div id='stock'>
                                         {meme.quantity > 0
                                             ? <form action={`/memes/${meme._id}/stock?_method=PUT`} method="POST">
@@ -64,12 +64,7 @@ class Index extends React.Component {
                                     </div>
 
                                         
-                                        {/* <hr></hr>
-                                        <form action={`/memes/${meme._id}?_method=DELETE`}  method="POST">
-                                        <input type="submit" value="DELETE" />
-                                        </form>
                                         
-                                        <button><a href={`/memes/${meme._id}/edit`}>{`Edit ${meme.name}`}</a></button> */}
                                         
 
                                     </li>

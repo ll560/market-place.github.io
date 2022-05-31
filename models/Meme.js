@@ -6,7 +6,7 @@ const memeSchema = new mongoose.Schema({
     price:{type: Number},
     quantity:{type: Number},
     color: {type: String},
-    readyToEat: Boolean
+
 });
 
 const Meme = mongoose.model('Meme', memeSchema)
